@@ -1,0 +1,42 @@
+[
+    {
+        "nombre": "alarm",
+        "clase_css": "bi-alarm"
+    },
+    {
+        "nombre": "calendar",
+        "clase_css": "bi-calendar"
+    },
+    {
+        "nombre": "chat-dots",
+        "clase_css": "bi-chat-dots"
+    },
+    {
+        "nombre": "cloud",
+        "clase_css": "bi-cloud"
+    },
+    {
+        "nombre": "house",
+        "clase_css": "bi-house"
+    },
+    {
+        "nombre": "gear",
+        "clase_css": "bi-gear"
+    },
+    {
+        "nombre": "trash",
+        "clase_css": "bi-trash"
+    },
+    {
+        "nombre": "check-circle",
+        "clase_css": "bi-check-circle"
+    },
+    {
+        "nombre": "x-circle",
+        "clase_css": "bi-x-circle"
+    },
+    {
+        "nombre": "plus-circle",
+        "clase_css": "bi-plus-circle"
+    }
+]

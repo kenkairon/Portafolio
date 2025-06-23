@@ -1,0 +1,549 @@
+/* Establece el tamaño y color de la barra de desplazamiento */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #444 #1e1e1e;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Define la fuente del cuerpo */
+header {
+    background: linear-gradient(to bottom, #1e1e1e, #2d2d2d);
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-weight: 600;
+    font-size: 1em;
+    color: #dcdcdc;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    padding: 1px;
+    border-bottom: 2px solid #007acc;
+}
+
+/* Estilo para el encabezado principal, fondo y texto */
+.navbar-nav .nav-link {
+    border-radius: 1;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo de los enlaces del menú con transición */
+.navbar-nav .nav-link:hover {
+    background-color: rgba(48, 157, 207, 0.2);
+}
+
+/* Efecto hover para los enlaces */
+.ocultar {
+    display: none;
+}
+
+/* Oculta elementos */
+.aparecer {
+    display: block;
+    scroll-behavior: initial;
+}
+
+/* Muestra el formulario de contacto */
+.highlight-text {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    color: #0056b3;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Estilo de texto destacado con transición */
+.nav-link:hover .highlight-text {
+    color: #004080;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto hover en texto destacado */
+button.nav-link {
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilo de los botones sin bordes */
+button.nav-link:hover {
+    background-color: rgba(240, 240, 240, 0.8);
+}
+
+/* Efecto hover en el botón */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+}
+
+/* Estilo del pie de página */
+@media (max-width: 768px) {
+
+    header,
+    footer {
+        text-align: center;
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+.ir-arriba {
+    display: none;
+    padding: 10px;
+    background: linear-gradient(to bottom, #2989d8 50%, #7db9e8 100%);
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+}
+
+/* Estilo para el botón flotante "ir-arriba" */
+.fuego::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    width: 8px;
+    height: 20px;
+    background: radial-gradient(circle, #ffcc00 30%, #ff6600 60%, transparent 90%);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fuego 0.3s infinite alternate;
+}
+
+/* Efecto de animación de fuego */
+@keyframes fuego {
+    0% {
+        height: 20px;
+        opacity: 0.9;
+        filter: blur(2px);
+    }
+
+    100% {
+        height: 30px;
+        opacity: 0.5;
+        filter: blur(4px);
+    }
+}
+
+/* Animación de fuego */
+.my-popup-class {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e0ffff 100%);
+    border-radius: 25% / 50%;
+    border-radius: 5px 50px / 50px 15px;
+    border-radius: 50px 25px 10px / 50px 75px 10px;
+    border-radius: 5px 50px 5px 50px / 50px 15px;
+}
+
+/* Estilo del pop-up con bordes redondeados */
+.my-title-class {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+/* Estilo del título del pop-up */
+#heart-icon {
+    color: gray;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+/* Estilo inicial del icono de corazón */
+#heart-icon.liked {
+    color: red;
+    animation: heartbeat 0.6s infinite;
+}
+
+/* Efecto cuando el icono de corazón es "liked" */
+.icon-text {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Estilo para el texto con iconos alineados */
+.fab,
+.fas,
+.bi:not(.sin-estilo) {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+/* Ajuste para los íconos de la barra de navegación */
+.sin-estilo {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Sombra en los iconos con la clase "sin-estilo" */
+button img {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/* Ajuste de tamaño para las imágenes dentro de los botones */
+.text-light {
+    line-height: 1.5;
+}
+
+/* Ajuste del espaciado de texto */
+.certificacion-img {
+    width: 100px;
+    height: auto;
+    max-width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Estilo para las imágenes de certificación */
+.certificacion-img:hover {
+    transform: scale(1.1);
+}
+
+/* Efecto de agrandamiento al pasar el mouse sobre la imagen de certificación */
+.certificacion-link {
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+/* Estilo para los enlaces de certificación */
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+}
+
+/* Animación para el latido del corazón */
+.vscode-modal {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo del modal tipo VS Code */
+.modal-header {
+    background-color: #252526;
+    color: #d4d4d4;
+}
+
+/* Estilo del encabezado del modal */
+.btn-vscode {
+    background-color: #007acc;
+    color: #fff;
+    border: 1px solid #007acc;
+    transition: 0.3s ease;
+}
+
+/* Estilo del botón VSCode */
+.btn-vscode:hover {
+    background-color: #005f99;
+    border-color: #005f99;
+}
+
+/* Estilo del botón VSCode en hover */
+.btn-vscode-alt {
+    background-color: #008000;
+    color: #fff;
+    border: 1px solid #008000;
+    transition: 0.3s ease;
+}
+
+/* Estilo del botón de éxito */
+.btn-vscode-alt:hover {
+    background-color: #006600;
+    border-color: #006600;
+}
+
+/* Estilo del botón de éxito en hover */
+.card__img {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    max-width: 80px;
+    aspect-ratio: 3 / 4;
+
+    border-radius: 20%;
+    object-fit: cover;
+
+    /* Sombra para efecto flotante */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4),
+        0 6px 6px rgba(0, 0, 0, 0.2);
+
+    position: relative;
+    overflow: hidden;
+
+    /* Efecto de profundidad */
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+/* Efecto de luz y sombra Yin-Yang */
+.card__img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20%;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 30%, rgba(0, 0, 0, 0.5) 70%);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+
+    /* Efecto de luz 4D */
+    box-shadow: inset 10px 10px 20px rgba(255, 255, 255, 0.2),
+        inset -10px -10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Brillo lateral */
+.card__img::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -20%;
+    width: 140%;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+/* Efecto de flotación y 3D al pasar el mouse */
+.card__img:hover {
+    transform: rotateY(10deg) rotateX(5deg) scale(1.08);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5),
+        0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card__img:hover::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 30%, rgba(0, 0, 0, 0.5) 70%);
+}
+
+/*****************
+   FONT STYLES
+ *****************/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/*****************
+    ROOT STYLES
+  *****************/
+
+
+:root {
+    --primary-color: #22223b;
+    --secondary-color: #9a8c98;
+    --background-color: #f2e9e4;
+    --text-color: var(--primary-color);
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --accent-color: #f72585;
+
+    [data-theme="dark"] {
+        --primary-color: #f2e9e4;
+        --text-color: var(--primary-color);
+        --background-color: #212529;
+        --box-shadow: 0 4px 6px rgba(239, 239, 239, 0.1);
+    }
+}
+
+/*****************
+    RESET STYLES
+  *****************/
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0;
+}
+
+/*****************
+    BODY STYLES
+  *****************/
+
+body {
+    font-family: 'Avenir-Book', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/*****************
+   FOOTER STYLES
+ *****************/
+
+footer {
+    font-family: 'Pano', sans-serif;
+    font-size: .7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    padding: 1rem;
+    background: #fafafa;
+    z-index: 0;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+footer .wrapper {
+    display: flex;
+    width: 100%;
+    padding: 2rem;
+    max-width: 1400px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.certificacion-img {
+    width: 100px;
+    height: auto;
+    margin: 10px;
+    transition: transform 0.2s;
+}
+
+.certificacion-img:hover {
+    transform: scale(1.1);
+}
+
+.certificacion-link {
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 649px) {
+    footer .wrapper {
+        flex-direction: column;
+    }
+
+    footer .wrapper h2 {
+        padding-bottom: .8rem;
+    }
+}
+
+/* Widget chat - mover a la izquierda */
+#whatsapp-widget {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 320px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    z-index: 9999;
+}
+
+/* Header */
+#whatsapp-header {
+    background-color: #25D366;
+    color: white;
+    padding: 15px 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+#whatsapp-close {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+/* Contenido mensajes */
+#whatsapp-messages {
+    height: 350px;
+    overflow-y: auto;
+    padding: 15px 20px;
+    background: #f7f7f7;
+    flex-grow: 1;
+}
+
+/* Burbujas usuario */
+.message.user {
+    background-color: #25D366;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px 20px 0 20px;
+    max-width: 70%;
+    margin-left: auto;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+}
+
+/* Burbujas bot */
+.message.bot {
+    background-color: #e5e5ea;
+    color: #000;
+    padding: 10px 15px;
+    border-radius: 20px 20px 20px 0;
+    max-width: 70%;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+}
+
+/* Área de entrada */
+#whatsapp-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+#whatsapp-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+}
+
+#whatsapp-send-btn {
+    background-color: #25D366;
+    border: none;
+    color: white;
+    padding: 0 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#whatsapp-send-btn:hover {
+    background-color: #1ebe57;
+}
+
+/* Botón flotante para abrir chat - mover a la izquierda */
+#chat-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+    z-index: 10000;
+}
+
+#chat-toggle-btn img {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}

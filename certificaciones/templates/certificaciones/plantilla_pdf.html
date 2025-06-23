@@ -1,0 +1,119 @@
+{% load text_filters %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CV - {{ header.nombre }} {{ header.primer_apellido }}</title>
+    <style>
+        body {
+            font-family: DejaVu Sans, sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #000;
+        }
+
+        h1,
+        h2 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 4px 0;
+        }
+
+        .info-contacto {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+
+        .info-contacto p {
+            margin: 2px 0;
+        }
+
+        .section {
+            margin-top: 15px;
+        }
+
+        .cert {
+            margin-left: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="info-contacto">{{ header.nombre }} {{ header.segundo_nombre }} {{ header.primer_apellido }}
+        {{header.segundo_apellido }}</h1>
+    <div class="info-contacto">
+        <p><strong>Cargo profesional:</strong> {{ header.cargo_profesional }}</p>
+        <p class="text-light fs-5">
+            {% for habilidad in habilidades_lista %}
+            <span class="icon-text">
+                <i class="{{ habilidad.icono.clase_css }}"></i>
+                <strong>{{ habilidad.nombre }}</strong>
+            </span>{% if not forloop.last %} | {% endif %}
+            {% endfor %}
+        </p>
+
+
+        <p><strong>Email:</strong> {{ header.email }}</p>
+        <p><strong>Teléfono:</strong> {{ header.telefono }}</p>
+        <p><strong>LinkedIn:</strong> {{ header.linkedin }}</p>
+        <p><strong>GitHub:</strong> {{ header.github }}</p>
+    </div>
+    <div class="section">
+        {% for objetivo in objetivos %}
+        <h2><strong>{{ objetivo.titulo }}</strong></h2>
+
+        {% if objetivo.modo_presentacion == 'parrafo' %}
+        {% for linea in objetivo.descripcion|splitlines %}
+        <p>{{ linea }}</p>
+        {% endfor %}
+        {% elif objetivo.modo_presentacion == 'lista' %}
+        <ul>
+            {% for linea in objetivo.descripcion|splitlines %}
+            <li>{{ linea }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h2>Experiencias Laborales</h2>
+        {% for proyecto in proyectos %}
+        <p><strong>{{ proyecto.titulo }}</strong>: {{ proyecto.descripcion }}</p>
+
+        {% if proyecto.estado|lower == "completado" %}
+        <p><em>Desde {{ proyecto.fecha_inicio|date:"F Y" }} hasta {{ proyecto.fecha_finalizacion|date:"F Y" }}</em></p>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="section">
+        <h2>Certificaciones</h2>
+        {% for cert in certificaciones %}
+        <div class="cert">
+            <p><strong>{{ cert.nombre }}</strong></p>
+
+            {% if cert.fecha_inicio and cert.fecha_finalizacion %}
+            <p><em>Desde {{ cert.fecha_inicio|date:"F Y" }} hasta {{ cert.fecha_finalizacion|date:"F Y" }}</em></p>
+            {% elif cert.fecha_inicio %}
+            <p><em>Desde {{ cert.fecha_inicio|date:"F Y" }}</em></p>
+            {% endif %}
+
+            {% if cert.enlace %}
+            <p><a href="{{ cert.enlace }}" target="_blank">Ver certificación</a></p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>

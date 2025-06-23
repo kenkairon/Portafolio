@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mt-2">
+    <div class="col-md-12">
+        <div class="container mt-3">
+            <div class="alert alert-info text-center shadow-sm rounded">
+                <h5 class="mb-1">
+                    <i class="bi bi-briefcase-fill mr-2"></i>
+                    Agregas Tu Experiencia Laboral o Proyectos Realizados
+                </h5>
+                <small>Puedes destacar tus logros y trabajos importantes aquí.</small>
+            </div>
+        </div>
+
+        <h4 class="display-5"><i class="bi bi-folder"></i> Mis Proyectos y Experiencias</h4>
+        <a href="{% url 'nuevo_proyecto' %}" class="btn btn-primary mb-3">
+            <i class="bi bi-plus-circle"></i> Nuevo Proyecto
+        </a>
+        <div class="list-group">
+            {% for proyecto in proyectos %}
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                        <i class="bi bi-file-earmark-text"></i> {{ proyecto.titulo }}
+                    </h5>
+                    <small><i class="bi bi-clock-history"></i> {{ proyecto.estado }}</small>
+                </div>
+                <p class="mb-1"><i class="bi bi-info-circle"></i> {{ proyecto.descripcion }}</p>
+                <small>
+                    <i class="bi bi-calendar-check"></i> Inicio: {{ proyecto.fecha_inicio }} |
+                    <i class="bi bi-calendar-x"></i> Fin: {{ proyecto.fecha_finalizacion }}
+                </small>
+                <div class="mt-2">
+                    <a href="{% url 'detalle_proyecto' proyecto.pk %}" class="btn btn-sm btn-info">
+                        <i class="bi bi-eye"></i> Detalles
+                    </a>
+                    <a href="{% url 'editar_proyecto' proyecto.pk %}" class="btn btn-sm btn-warning">
+                        <i class="bi bi-pencil"></i> Editar
+                    </a>
+                    <a href="{% url 'eliminar_proyecto' proyecto.pk %}" class="btn btn-sm btn-danger">
+                        <i class="bi bi-trash"></i> Eliminar
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<nav aria-label="Paginación de proyectos" class="mt-3">
+    <ul class="pagination justify-content-center">
+        {% if proyectos.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ proyectos.previous_page_number }}" aria-label="Anterior">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+        {% endif %}
+
+        {% for num in proyectos.paginator.page_range %}
+        {% if proyectos.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% elif num > proyectos.number|add:'-3' and num < proyectos.number|add:'3' %} <li class="page-item"><a
+                class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if proyectos.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ proyectos.next_page_number }}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}

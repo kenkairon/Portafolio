@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-gradient text-white d-flex align-items-center bg-primary rounded-0 py-4 px-4">
+            <i class="fas fa-user-circle fa-2x me-3"></i>
+            <h2 class="mb-0">Bienvenido, {{ request.user.username }}</h2>
+        </div>
+
+        <div class="card-body bg-white px-4 py-5">
+            <h4 class="fs-5 text-muted mb-4">
+                <i class="fas fa-hand-sparkles text-success me-2"></i>
+                ¡Nos alegra verte de nuevo! Usa las secciones siguientes para construir tu portafolio profesional.
+            </h4>
+
+            <div class="alert alert-info border-start border-4 border-primary shadow-sm rounded mb-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="fas fa-tools me-2 text-primary"></i>Guía Rápida para Crear tu Portafolio
+                </h5>
+                <ul class="mb-0 ps-3">
+                    <li><i class="fas fa-check-circle text-success me-2"></i>Agrega tus <strong>iconos</strong> de
+                        presentación.</li>
+                    <li><i class="fas fa-check-circle text-success me-2"></i>Completa tu <strong>información
+                            personal</strong>.</li>
+                    <li><i class="fas fa-check-circle text-success me-2"></i>Registra <strong>habilidades, objetivos,
+                            proyectos</strong> y <strong>certificaciones</strong>.</li>
+                    <li><i class="fas fa-check-circle text-success me-2"></i>Descarga tu portafolio desde
+                        <strong>Home</strong>.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row g-3 text-center">
+                <div class="col-md-4">
+                    <a href="{% url 'listar_iconos' %}" class="btn btn-warning btn-lg w-100 shadow-sm">
+                        <i class="fas fa-icons me-2"></i>Iconos
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'mostrar_header' %}" class="btn btn-outline-dark btn-lg w-100 shadow-sm">
+                        <i class="fas fa-id-badge me-2"></i>Header
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'lista_habilidades' %}" class="btn btn-outline-success btn-lg w-100 shadow-sm">
+                        <i class="fas fa-lightbulb me-2"></i>Habilidades
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'objetivo_list' %}" class="btn btn-outline-info btn-lg w-100 shadow-sm">
+                        <i class="fas fa-bullseye me-2"></i>Objetivos
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'lista_proyectos' %}" class="btn btn-outline-primary btn-lg w-100 shadow-sm">
+                        <i class="fas fa-project-diagram me-2"></i>Proyectos
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'certificacion_list' %}" class="btn btn-outline-secondary btn-lg w-100 shadow-sm">
+                        <i class="fas fa-certificate me-2"></i>Certificaciones
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{% url 'logout' %}" class="btn btn-danger btn-lg shadow-sm px-4">
+                    <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

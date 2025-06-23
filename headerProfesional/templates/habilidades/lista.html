@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="mt-3">Mis habilidades</h2>
+<a href="{% url 'crear_habilidad' %}" class="btn btn-primary mb-3">
+    <i class="bi bi-plus-circle"></i> Agregar nueva habilidad
+</a>
+<div class="row">
+    {% if habilidades %}
+    {% for hab in habilidades %}
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column align-items-center">
+                <!-- Icono -->
+                <i class="{{ hab.icono.clase_css }} fs-1 text-primary mb-3"></i>
+
+                <!-- Nombre de habilidad -->
+                <h5 class="card-title text-center">{{ hab.nombre }}</h5>
+
+                <!-- Nivel -->
+                <p class="card-text text-center">Nivel: {{ hab.nivel|default:"No especificado" }}</p>
+
+                <!-- Botones -->
+                <div class="mt-auto text-center">
+                    <a href="{% url 'editar_habilidad' hab.pk %}" class="btn btn-sm btn-outline-primary me-2">
+                        <i class="fas fa-edit"></i> Editar
+                    </a>
+                    <a href="{% url 'eliminar_habilidad' hab.pk %}" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="col-12">
+        <p class="text-center text-muted">No tienes habilidades agregadas.</p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Paginación -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if habilidades.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ habilidades.previous_page_number }}" aria-label="Anterior">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">&laquo;</span>
+        </li>
+        {% endif %}
+
+        {% for num in habilidades.paginator.page_range %}
+        {% if habilidades.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% elif num > habilidades.number|add:'-3' and num < habilidades.number|add:'3' %} <li class="page-item"><a
+                class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if habilidades.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ habilidades.next_page_number }}" aria-label="Siguiente">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&raquo;</span>
+            </li>
+            {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}

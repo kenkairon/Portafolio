@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+<header class="bg-primary text-white text-center py-5 elegant-gradient-border">
+    <h1 class="sin-estilo">{{ header.nombre }} {{ header.segundo_nombre }}
+        {{ header.primer_apellido }} {{header.segundo_apellido }}
+
+    </h1>
+    <!-- Botones de editar y eliminar -->
+    <div class="mt-3">
+        <a href="{% url 'editar_header' %}" class="btn btn-warning btn-sm">Editar</a>
+        <a href="{% url 'eliminar_header' %}" class="btn btn-danger btn-sm">Eliminar</a>
+    </div>
+
+    {% if header.imagen %}
+    <img src="{{ header.imagen.url }}" class="rounded-circle img-fluid" width="200" height="200" alt="Foto de perfil">
+    {% endif %}
+
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="text-center p-4 border border-secondary rounded">
+                <h4 class="font-weight-bold display-4 mb-3">
+                    <i class="bi bi-code-slash text-light mr-2 d-none d-sm-inline"></i>
+                    {{ header.cargo_profesional }}
+                </h4>
+                <p class="text-light fs-5">
+                    {% for habilidad in user.habilidades.all %}
+                    <span class="icon-text mr-2 d-inline-flex align-items-center">
+                        <i class="{{ habilidad.icono.clase_css }} mr-1"></i>
+                        {{ habilidad.nombre }}
+                    </span>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+        <!-- Contacto: Email, LinkedIn, GitHub, Teléfono -->
+        <div class="mt-4 d-flex flex-wrap justify-content-center">
+            {% if header.email %}
+            <a href="mailto:{{ header.email }}" class="text-white text-decoration-none d-flex align-items-center m-2">
+                <i class="bi bi-envelope-fill mr-2"></i>{{ header.email }}
+            </a>
+            {% endif %}
+            {% if header.linkedin %}
+            <a href="{{ header.linkedin }}" target="_blank"
+                class="text-white text-decoration-none d-flex align-items-center m-2">
+                <i class="bi bi-linkedin mr-2"></i>LinkedIn
+            </a>
+            {% endif %}
+            {% if header.github %}
+            <a href="{{ header.github }}" target="_blank"
+                class="text-white text-decoration-none d-flex align-items-center m-2">
+                <i class="bi bi-github mr-2"></i>GitHub
+            </a>
+            {% endif %}
+            {% if header.telefono %}
+            <a href="https://wa.me/{{ header.telefono|cut:" +"|cut:" " }}" target="_blank"
+                class="text-white text-decoration-none d-flex align-items-center m-2">
+                <i class="bi bi-whatsapp mr-2"></i>WhatsApp
+            </a>
+            {% endif %}
+        </div>
+
+
+
+    </section>
+</header>
+
+{% endblock %}

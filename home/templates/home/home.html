@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load text_filters %}
+{% load cache %}
+{% cache 600 headers header.id %}
+<header class="bg-primary text-white text-center py-5 elegant-gradient-border">
+    <a href="{% url 'generar_pdf' %}" class="btn btn-primary" target="_blank">
+        Descargar Cv PDF
+    </a>
+    <h1 class="sin-estilo">{{ header.nombre }} {{ header.segundo_nombre }}
+        {{ header.primer_apellido }} {{header.segundo_apellido }}</h1>
+
+    {% if header.imagen %}
+    <img src="{{ header.imagen.url }}" class="rounded-circle img-fluid" width="200" height="200" alt="Foto de perfil">
+    {% endif %}
+
+
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="text-center p-4 border border-secondary rounded">
+                <h4 class="font-weight-bold display-4 mb-3">
+                    <i class="bi bi-code-slash text-light mr-2 d-none d-sm-inline"></i>
+                    {{ header.cargo_profesional }}
+                </h4>
+                <p class="text-light fs-5">
+                    {% for habilidad in user.habilidades.all %}
+                    <span class="icon-text mr-2 d-inline-flex align-items-center">
+                        <i class="{{ habilidad.icono.clase_css }} mr-1"></i>
+                        {{ habilidad.nombre }}
+                    </span>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+        <!-- Contacto: Email, LinkedIn, GitHub, Teléfono -->
+        <div class="mt-4 d-flex flex-wrap justify-content-center">
+            {% if header.email %}
+            <a href="mailto:{{ header.email }}" class="text-white text-decoration-none d-flex align-items-center m-2">
+                <i class="bi bi-envelope-fill mr-2"></i>{{ header.email }}
+            </a>
+            {% endif %}
+            {% if header.linkedin %}
+            <a href="{{ header.linkedin }}" target="_blank"
+                class="text-white text-decoration-none d-flex align-items-center m-2">
+                <i class="bi bi-linkedin mr-2"></i>LinkedIn
+            </a>
+            {% endif %}
+            {% if header.github %}
+            <a href="{{ header.github }}" target="_blank"
+                class="text-white text-decoration-none d-flex align-items-center m-2">
+                <i class="bi bi-github mr-2"></i>GitHub
+            </a>
+            {% endif %}
+            {% if header.telefono %}
+            <a href="https://wa.me/{{ header.telefono|cut:" +"|cut:" " }}" target="_blank"
+                class="text-white text-decoration-none d-flex align-items-center m-2">
+                <i class="bi bi-whatsapp mr-2"></i>WhatsApp
+            </a>
+            {% endif %}
+        </div>
+
+    </section>
+</header>
+{% endcache %}
+<main class="container my-5">
+    {% cache 600 objetivos header.id %}
+    {% for objetivo in objetivos %}
+    <div class="col-md-12 mb-3 mt-2" id="objetivo-profesional">
+        <div class="card text-white rounded-3 shadow-lg" style="background-color: #1E1E1E; border: 1px solid #2D2D30;">
+
+            <div class="card-header bg-dark rounded-top d-flex justify-content-between align-items-center">
+                <h2 class="mb-0" style="font-family: 'Courier New', Courier, monospace; color: #dfe6e3;">
+                    {% if objetivo.icono %}
+                    <i class="{{ objetivo.icono.clase_css }}"></i>
+                    {% else %}
+                    <i class="bi bi-trophy-fill"></i>
+                    {% endif %}
+                    {{ objetivo.titulo }}
+                </h2>
+            </div>
+
+            <div class="card-body bg-light text-dark rounded-bottom" style="font-family: 'Fira Code', monospace;">
+                {% if objetivo.modo_presentacion == 'lista' %}
+                <ul>
+                    {% for linea in objetivo.descripcion|splitlines %}
+                    {% if linea %}
+                    <li>{{ linea }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>{{ objetivo.descripcion|linebreaks }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endcache %}
+    <!-- Sección "Proyectos" -->
+    {% cache 600 proyectos header.id %}
+    <section id="projects" class="my-2">
+        <!-- Sección "Proyectos" -->
+        <div class="col-md-12">
+            <div class="card mb-3 text-white rounded-3 shadow-lg"
+                style="background-color: #1E1E1E; border: 1px solid #2D2D30;">
+                <div class="card-header bg-dark rounded-top">
+                    <h2 style="font-family: 'Courier New', Courier, monospace; color: #dfe6e3;">
+                        <i class="bi bi-body-text"></i> Proyectos
+                    </h2>
+                </div>
+            </div>
+            <div class="list-group">
+                {% for proyecto in proyectos %}
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">
+                            <i class="bi bi-file-earmark-text"></i> {{ proyecto.titulo }}
+                        </h5>
+                        <small><i class="bi bi-clock-history"></i> {{ proyecto.estado }}</small>
+                    </div>
+                    <p class="mb-1"><i class="bi bi-info-circle"></i> {{ proyecto.descripcion }}</p>
+                    <small>
+                        <i class="bi bi-calendar-check"></i> Inicio: {{ proyecto.fecha_inicio }} |
+                        <i class="bi bi-calendar-x"></i> Fin: {{ proyecto.fecha_finalizacion }}
+                    </small>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endcache %}
+    <!-- Sección "Certificaciones y Bootcamps" -->
+    {% cache 600 certificaciones header.id %}
+    <section id="skills">
+        <div class="col-md-12">
+            <div class="card mb-3 text-white rounded-3 shadow-lg"
+                style="background-color: #1E1E1E; border: 1px solid #2D2D30;">
+                <div class="card-header bg-dark rounded-top">
+                    <h2 style="font-family: 'Courier New', Courier, monospace; color: #dfe6e3;">
+                        <i class="bi bi-mortarboard"></i> Certificaciones y Bootcamps
+                    </h2>
+                </div>
+                <div class="card-body bg-light text-dark rounded-bottom">
+                    <div class="container-fluid p-2 text-center" style="font-family: 'Fira Code', monospace;">
+                        {% for cert in certificaciones %}
+                        <a href="{{ cert.enlace }}" target="_blank" class="certificacion-link">
+                            <img src="{{ cert.imagen.url }}" alt="{{ cert.nombre }}" class="certificacion-img"
+                                style="width: 100px; height: auto; margin: 10px;">
+                        </a>
+                        {% empty %}
+                        <p>No hay certificaciones cargadas.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endcache %}
+</main>
+{% endblock %}

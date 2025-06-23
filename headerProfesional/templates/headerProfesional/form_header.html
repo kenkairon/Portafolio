@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ accion }} Header</h2>
+    <form method="post" enctype="multipart/form-data" class="p-4 border rounded shadow">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary mt-3">{{ accion }}</button>
+    </form>
+</div>
+{% endblock %}

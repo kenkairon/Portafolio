@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Contáctame{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-info text-white text-center">
+                    <h2 class="mb-0"><i class="bi bi-envelope"></i> Contáctame</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Campo Nombre -->
+                        <div class="mb-3">
+                            <label class="form-label"><i class="bi bi-person"></i> Nombre</label>
+                            {{ form.nombre }}
+                        </div>
+
+                        <!-- Campo Email -->
+                        <div class="mb-3">
+                            <label class="form-label"><i class="bi bi-envelope"></i> Correo Electrónico</label>
+                            {{ form.email }}
+                        </div>
+
+                        <!-- Campo Mensaje -->
+                        <div class="mb-3">
+                            <label class="form-label"><i class="bi bi-chat-dots"></i> Mensaje</label>
+                            {{ form.mensaje }}
+                        </div>
+
+                        <!-- Botón de Enviar -->
+                        <button type="submit" class="btn btn-info w-100">
+                            <i class="bi bi-send"></i> Enviar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

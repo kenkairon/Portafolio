@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ form.instance.pk|yesno:"Editar Icono,Nuevo Icono" }}{% endblock %}
+
+{% block content %}
+<h2>{{ form.instance.pk|yesno:"Editar Icono,Nuevo Icono" }}</h2>
+<!-- Tutorial: Cómo agregar íconos (Font Awesome y Bootstrap Icons) -->
+<div class="alert alert-info d-flex align-items-start shadow-sm mb-4" role="alert">
+    <i class="fa-solid fa-circle-info fa-lg me-3 mt-1 text-info"></i>
+    <div>
+        <strong>¿Cómo agregar un ícono?</strong><br>
+
+        <u>🔹 Con Font Awesome:</u><br>
+        Primero, Colocale un <b>Nombre ejemplo: corazon</b> .<br>
+        Luego usa la clase CSS correspondiente.<br>
+        Por ejemplo: <code>fa-solid fa-heart</code> mostrará
+        <i class="fa-solid fa-heart text-danger"></i>.<br>
+        Explora más íconos en
+        <a href="https://fontawesome.com/icons" target="_blank">fontawesome.com/icons</a>.
+
+        <hr class="my-2">
+
+        <u>🔹 Con Bootstrap Icons:</u><br>
+        Primero, Ingresa un <b>Nombre ejemplo: estrella</b>, Puedes Buscar mas iconos en esta página<br>
+        <a href="https://icons.getbootstrap.com/#usage" target="_blank">icons.getbootstrap.com</a>.<br>
+        Luego usa la clase del ícono que desees.<br>
+        Por ejemplo: <code>bi bi-star-fill</code> mostrará
+        <i class="bi bi-star-fill text-warning"></i>.<br>
+        Consulta todos los íconos disponibles en el sitio oficial.
+
+    </div>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success" type="submit">Guardar</button>
+    <a class="btn btn-secondary" href="{% url 'listar_iconos' %}">Volver</a>
+</form>
+{% endblock %}

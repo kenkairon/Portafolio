@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow-sm border-0 bg-light rounded-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        {% if form.instance.pk %}
+                        <i class="bi bi-pencil-square"></i> Editar Habilidad
+                        {% else %}
+                        <i class="bi bi-plus-circle"></i> Crear Habilidad
+                        {% endif %}
+                    </h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">
+                                {% if field.name == 'nombre' %}
+                                <i class="bi bi-lightbulb"></i>
+                                {% elif field.name == 'nivel' %}
+                                <i class="bi bi-bar-chart-steps"></i>
+                                {% elif field.name == 'icono' %}
+                                <i class="bi bi-emoji-smile"></i> {{ field.label }}
+                                <div id="icono-preview" class="mb-2 fs-3"></div>
+                                {% endif %}
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                            {% if field.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in field.errors %}
+                                <div><i class="bi bi-exclamation-circle"></i> {{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
+                        <button type="submit" class="btn btn-primary mt-3">
+                            <i class="bi bi-save2"></i> Guardar
+                        </button>
+                        <a href="{% url 'lista_habilidades' %}" class="btn btn-outline-success mt-3 ml-2">
+                            <i class="bi bi-arrow-left-circle"></i> Volver a la lista
+                        </a>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const select = document.getElementById('{{ form.icono.id_for_label }}');
+        const preview = document.getElementById('icono-preview');
+
+        function updatePreview() {
+            const selectedOption = select.options[select.selectedIndex];
+            const claseCss = selectedOption.textContent.trim(); // Suponiendo que el nombre del icono es la clase
+            preview.innerHTML = `<i class="${claseCss}"></i>`;
+        }
+
+        select.addEventListener('change', updatePreview);
+
+        // Mostrar ícono al cargar la página si ya hay uno seleccionado
+        if (select.value) updatePreview();
+    });
+</script>
+
+{% endblock %}

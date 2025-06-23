@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load text_filters %}
+{% block content %}
+<div class="container my-1">
+    <h1 class="text-center mb-1 text-white">Mis Objetivos Profesionales</h1>
+
+    <!-- Sugerencia -->
+    <div class="card shadow mb-2" style="background-color: #1E1E1E; border-left: 5px solid #ffc107; color: #dcdcdc;">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-lightbulb-fill me-2 text-warning"></i>
+                ¿No sabes qué agregar? Aquí tienes algunas ideas:
+            </h5>
+            <ul class="mb-0 ps-3">
+                <li><i class="bi bi-briefcase-fill me-1 text-info"></i> <strong>Objetivo Profesional:</strong> ¿Qué
+                    deseas lograr en tu carrera?</li>
+                <li><i class="bi bi-mortarboard-fill me-1 text-info"></i> <strong>Formación Académica:</strong> Tus
+                    estudios y títulos más importantes</li>
+                <li><i class="bi bi-tools me-1 text-info"></i> <strong>Competencias Técnicas:</strong> Lenguajes,
+                    herramientas, frameworks, etc.</li>
+                <li><i class="bi bi-people-fill me-1 text-info"></i> <strong>Habilidades Interpersonales:</strong>
+                    Comunicación, liderazgo, trabajo en equipo</li>
+                <li><i class="bi bi-translate me-1 text-info"></i> <strong>Idiomas:</strong> Nivel de inglés u otros
+                    idiomas que manejas</li>
+            </ul>
+        </div>
+    </div>
+    <div class="text-center mt-2">
+        <a href="{% url 'objetivo_create' %}" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Agregar Objetivo
+        </a>
+    </div>
+    {% for objetivo in objetivos %}
+    <div class="col-md-12 mb-3 mt-2" id="objetivo-profesional">
+        <div class="card text-white rounded-3 shadow-lg" style="background-color: #1E1E1E; border: 1px solid #2D2D30;">
+
+            <div class="card-header bg-dark rounded-top d-flex justify-content-between align-items-center">
+                <h2 class="mb-0" style="font-family: 'Courier New', Courier, monospace; color: #dfe6e3;">
+                    {% if objetivo.icono %}
+                    <i class="{{ objetivo.icono.clase_css }}"></i>
+                    {% else %}
+                    <i class="bi bi-trophy-fill"></i>
+                    {% endif %}
+                    {{ objetivo.titulo }}
+                </h2>
+                <div>
+                    <a href="{% url 'objetivo_update' objetivo.pk %}" class="btn btn-sm btn-outline-warning">
+                        <i class="bi bi-pencil-square"></i> Editar
+                    </a>
+                    <a href="{% url 'objetivo_delete' objetivo.pk %}" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-trash-fill"></i> Eliminar
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-body bg-light text-dark rounded-bottom" style="font-family: 'Fira Code', monospace;">
+                {% if objetivo.modo_presentacion == 'lista' %}
+                <ul>
+                    {% for linea in objetivo.descripcion|splitlines %}
+                    {% if linea %}
+                    <li>{{ linea }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>{{ objetivo.descripcion|linebreaks }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-info text-center">No tienes objetivos cargados aún.</div>
+    {% endfor %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if objetivos.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ objetivos.previous_page_number }}" aria-label="Anterior">
+                    &laquo;
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+
+            {% for num in objetivos.paginator.page_range %}
+            {% if objetivos.number == num %}
+            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if objetivos.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ objetivos.next_page_number }}" aria-label="Siguiente">
+                    &raquo;
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+</div>
+{% endblock %}

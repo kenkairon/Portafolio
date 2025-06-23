@@ -1,0 +1,26 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'includes/head.html' %}
+    {% bootstrap_css %}
+</head>
+
+<body class="container">
+    {% include 'includes/nav.html' %} <!-- Contenido principal -->
+
+    <main>
+        {% include 'includes/mensajes.html' %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% include 'includes/whatsapp_widget.html' %}
+    {% include 'includes/footer.html' %}
+    {% bootstrap_javascript jquery="full" %}
+    <!-- JavaScript principal -->
+    <!-- Bootstrap 4 CSS -->
+</body>
+
+</html>

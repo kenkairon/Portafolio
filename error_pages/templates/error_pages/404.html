@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}404{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="custom-card text-center p-4 shadow-lg rounded">
+        <div class="card-body">
+            <h1 class="display-1 text-danger">404</h1>
+            <h2 class="card-title mb-3">Página no encontrada</h2>
+            <p class="card-text text-muted mb-4">¡Ups! Parece que la página que buscas no existe o se ha movido.</p>
+            <a href="/" class="btn btn-primary btn-lg">
+                <i class="fas fa-home"></i> Volver al Inicio
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

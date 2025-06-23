@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand font-weight-bold text-primary" href="{% url 'home' %}">
+            <i class="fas fa-home"></i> Home
+        </a>
+
+        <!-- Botón hamburguesa -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Contenido de la navbar -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link text-dark font-weight-bold" href="{% url 'register' %}">
+                        <i class="fas fa-user-plus"></i> Crear Cuenta
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                <!-- Destacado: Dashboard como botón -->
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary btn-sm font-weight-bold mr-2 mt-1" href="{% url 'dashboard' %}">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-success font-weight-bold" href="{% url 'listar_iconos' %}">
+                        <i class="fas fa-icons"></i> Iconos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark font-weight-bold" href="{% url 'mostrar_header' %}">
+                        <i class="fas fa-id-card"></i> Header
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark font-weight-bold" href="{% url 'lista_habilidades' %}">
+                        <i class="fas fa-tools"></i> Habilidades
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark font-weight-bold" href="{% url 'objetivo_list' %}">
+                        <i class="fas fa-bullseye"></i> Objetivos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark font-weight-bold" href="{% url 'lista_proyectos' %}">
+                        <i class="fas fa-project-diagram"></i> Experiencias
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark font-weight-bold" href="{% url 'certificacion_list' %}">
+                        <i class="fas fa-award"></i> Insignias
+                    </a>
+                </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark font-weight-bold" href="{% url 'contacto' %}">
+                        <i class="fas fa-envelope"></i> Contáctame
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Usuario y sesión -->
+            <span class="navbar-text">
+                {% if user.is_authenticated %}
+                <span class="text-dark font-weight-bold mr-2">
+                    Hola, {{ user.username }}!
+                </span>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                </a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</nav>
