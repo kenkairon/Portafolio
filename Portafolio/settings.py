@@ -100,15 +100,11 @@ LOGOUT_REDIRECT_URL = '/Account/login/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-# Cargar configuración de base de datos
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Motor de la base de datos
-        'NAME': 'examen_final',       # Nombre de tu base de datos
-        'USER': 'postgres',                      # Usuario de la base de datos
-        'PASSWORD': 'super006006***',               # Contraseña de la base de datos
-        'HOST': '127.0.0.1',                       # Dirección del host (localhost o IP del servidor)
-        'PORT': '5432',                            # Puerto (el predeterminado es 5432 para PostgreSQL)
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
