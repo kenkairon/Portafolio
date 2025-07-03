@@ -23,7 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ia6-*jz&22+39s7y4870131l)su71$e0i81@8nekdu&fjde4_j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+import os
+
+DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -143,17 +146,18 @@ USE_L10N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+
 STATIC_URL = '/static/'
-
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  
-]
-
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+if DEBUG:
+    STATICFILES_DIRS = [BASE_DIR / "static"]
+else:
+    STATICFILES_DIRS = []  # No se necesita en producción porque usas collectstatic
+
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/home/'
