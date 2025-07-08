@@ -7,6 +7,7 @@ from .forms import HabilidadForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 @login_required
 def mostrar_header(request):
@@ -67,7 +68,6 @@ def lista_habilidades(request):
     habilidades = paginator.get_page(page_number)
 
     return render(request, 'habilidades/lista.html', {'habilidades': habilidades})
-from django.core.exceptions import ValidationError
 
 @login_required
 def crear_habilidad(request):
@@ -76,8 +76,12 @@ def crear_habilidad(request):
         if form.is_valid():
             habilidad = form.save(commit=False)
             habilidad.usuario = request.user
-            habilidad.save()
-            return redirect('lista_habilidades')
+            try:
+                habilidad.save()
+                return redirect('lista_habilidades')
+            except ValidationError as e:
+                # Agrega los errores al formulario para que se muestren en el template
+                form.add_error(None, e)  # 'None' se usa para errores generales (non_field_errors)
     else:
         form = HabilidadForm(user=request.user)
 
