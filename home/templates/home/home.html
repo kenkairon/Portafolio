@@ -18,10 +18,17 @@
     <section class="py-5 bg-dark text-white">
         <div class="container">
             <div class="text-center p-4 border border-secondary rounded">
-                <h4 class="font-weight-bold display-4 mb-3">
+                <!-- Solo para pantallas SM en adelante (≥576px) -->
+                <h4 class="font-weight-bold mb-3 display-4 d-none d-sm-block">
                     <i class="bi bi-code-slash text-light mr-2 d-none d-sm-inline"></i>
                     {{ header.cargo_profesional }}
                 </h4>
+
+                <!-- Solo para pantallas XS (<576px) -->
+                <h5 class="font-weight-bold mb-3 h6 d-block d-sm-none text-light">
+                    <i class="bi bi-code-slash text-light mr-2"></i>
+                    {{ header.cargo_profesional }}
+                </h5>
                 <p class="text-light fs-5">
                     {% for habilidad in user.habilidades.all %}
                     <span class="icon-text mr-2 d-inline-flex align-items-center">
