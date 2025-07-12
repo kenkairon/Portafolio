@@ -1,145 +1,122 @@
-# cursoFinalDjango
-Educativo y de Aprendizaje Personal
+# 🧠 cursoFinalDjango
+**Educativo y de Aprendizaje Personal**
 
-
-Proyecto Django
-
-1. Partes del Proyecto
-
+---
 
 ## 📌 Nombre del Proyecto
-
+**Portafolio Profesional Online**
 
 ### 👤 Integrante
-
 Carlos Vasquez
 
-## 🎯 Objetivo General
+---
 
+## 🎯 Objetivo General
 Desarrollar una aplicación web que permita generar un currículum vitae en tiempo real, incorporando datos ingresados dinámicamente por el usuario y ofreciendo la opción de visualizar e imprimir el currículum finalizado.
 
-Estructura del Proyecto:
-
+---
 
 ## 📝 Descripción del Proyecto
+El proyecto resuelve la dificultad que enfrentan muchas personas al crear, actualizar y presentar su currículum vitae. Al permitir ingresar datos en tiempo real y generar automáticamente un formato listo para impresión, facilita la creación de un CV profesional de manera rápida y accesible.
 
-El proyecto resuelve la dificultad que enfrentan muchas personas al crear, actualizar y presentar su currículum vitae. Al permitir ingresar datos en tiempo real y generar automáticamente un formato listo para impresión, facilitando la creación de un CV profesional de manera rápida y accesible.
-
+---
 
 ## ⚙️ Funcionalidad Principal
-
 Permitir al usuario ingresar sus datos personales, académicos y laborales de forma estructurada, para luego generar automáticamente un currículum vitae que puede ser visualizado, descargado e impreso desde la plataforma.
 
+---
 
 ## 👥 Usuarios del Sistema
+Diseñado para personas que desean crear o actualizar su currículum de forma rápida y profesional. Incluye:
+- Estudiantes 🎓
+- Profesionales 👔
+- Técnicos 🛠️
 
-El sistema está diseñado para ser utilizado por personas que desean crear o actualizar su currículum vitae de forma rápida y profesional , Esto incluye estudiantes, profesionales, técnicos y cualquier usuario que requiera generar su portafolio laboral.
+---
 
-3. Repositorio en GitHub
+## 🔗 Repositorio en GitHub
+[![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github)](https://github.com/kenkairon/Portafolio.git)
 
-https://github.com/kenkairon/Portafolio.git
+---
 
-4.URL del Proyecto en Producción
+## 🌐 URL del Proyecto en Producción
+[🔗 Acceder a la Aplicación](https://kenkairon.pythonanywhere.com/)
 
-https://kenkairon.pythonanywhere.com/
+---
 
-5. Tecnologías a Utilizar
+## 🛠️ Tecnologías Utilizadas
+- Django 5.1.5 🐍
+- SQLite 🗄️
+- Bootstrap 4.6 🎨
+- Font Awesome 6.5.1 & Bootstrap Icons 1.11 🎯
 
-Django 5.1.5
-
-SQLite
-
-Frontend: Bootstrap 4.6
-
-Librerías adicionales para iconos : font-awesome 6.5.1  y bootstrap-iconos 1.11
-
+---
 
 ## 🔄 Flujo del Sistema
+📌 **Etapas:**
+1. **Ingreso a la plataforma**
+   - Registro o inicio de sesión 🔐
+   - Acceso al dashboard principal
 
-El flujo del sistema describe las etapas que sigue el usuario dentro de la aplicación, desde su ingreso hasta la generación y visualización del currículum profesional.
+2. **Dashboard**
+   - Header profesional
+   - Habilidades 🧠
+   - Objetivos 🎯
+   - Proyectos 💼
+   - Certificaciones 📜
+   - Iconos 🎨
 
-1. Ingreso a la plataforma
-- El usuario puede registrarse o iniciar sesión mediante un formulario de autenticación.
-- Una vez autenticado, es redirigido al dashboard principal, donde tiene acceso a todas las secciones de su portafolio profesional.
+3. **Generación del CV**
+   - Visualización en tiempo real 👀
+   - Descarga e impresión 🖨️
 
-2. Panel de control (Dashboard)
-Desde el dashboard, el usuario tiene acceso a diferentes módulos que representan componentes clave de su currículum:
+---
 
-- Encabezado Profesional (Header): Permite definir información introductoria como nombre, cargo, resumen profesional, entre otros.
-- Habilidades: El usuario puede agregar habilidades técnicas o blandas, cada una asociada a un ícono personalizado para mejorar la visualización.
-- Objetivos Profesionales: Sección destinada a ingresar las metas u objetivos del usuario.
-- Proyectos: Permite documentar y listar los proyectos personales o profesionales más relevantes.
-- Certificaciones: Sección para registrar certificados, cursos o capacitaciones completadas por el usuario.
-- Iconos: Librería personalizada para representar gráficamente habilidades o secciones clave del CV.
+## 🧬 Relación de los Modelos
 
-3. Generación del Currículum
-- Una vez que el usuario ha completado todas las secciones, el sistema genera automáticamente un currículum profesional estructurado.
-- El currículum puede ser:
-  - Visualizado en tiempo real desde la plataforma.
-  - Descargado en formato listo para impresión.
-  - Impreso directamente desde el navegador.
+### `headerProfesional`
+- `Habilidad`: `ForeignKey(User)`
+- `Habilidad`: `ForeignKey(Icono)`
+- `Header`: `OneToOneField(User)`
 
-Se registra un usuario o se logea para empezar a entrar en la Plataforma
+### `Iconos`
+- `Icono`: `ForeignKey(User)`
 
-Dashboard
+---
 
-iconos
+## ✅ Funcionalidades CRUD
+- `Iconos`
+- `headerProfesional` → `habilidades`
+- `Objetivos`
+- `Proyectos`
+- `Certificaciones`
 
-header
-
-Habilidades
-
-Objetivos
-
-Proyectos
-
-Certificaciones
-
-6. Relación de los Modelos
-
-Módulo:  headerProfesional
-
-Módulo: Iconos
-
-7. Funcionalidades CRUD
-
-¿Qué modelos tienen CRUD completo (crear, leer, actualizar, eliminar)?
-
-Modelo 1: iconos
-
-Modelo 2: headerProfesional -> habilidades -> headerProfesional
-
-Modelo 3: objetivos
-
-Modelo 4: proyectos
-
-Modelo 5: certificaciones
-
-8. Servicio
-
+---
 
 ## ✉️ Servicio de Contacto
+📬 Envío de correos a través de SMTP.  
+Configurado en `settings.py` dentro del módulo `contacto`.
 
-Modulo de contacto y implementado en el settings.py
+---
 
-9. Middleware
+## 🛡️ Middleware
+Implementado en el módulo `Accounts`.
 
-El uso del middleware se encuentra en el  modulo Acounts
+Funciones:
+- Protección: CSRF, HTTPS, Clickjacking 🔐
+- Autenticación, sesiones y mensajes 🧾
+- Redirección personalizada de usuarios 🔁
 
-Función que desarolla
+---
 
-Protege tu aplicación (CSRF, clickjacking, HTTPS).
+## 🧩 Fragment Caching
+Usado en el módulo `home` para mejorar el rendimiento de carga de plantillas.
 
-Maneja usuarios (autenticación, sesiones, mensajes).
+---
 
-Personaliza flujos (redirección de usuarios autenticados).
+## ⚙️ GitHub Actions
+Los tests se ejecutan automáticamente mediante CI/CD en GitHub Actions.  
+📌 Resultado visible en la pestaña `Actions` del repositorio.
 
-Implementado en el settings.py
+---
 
-10. Implementa template fragment caching en alguna sección de la interfaz.
-
-En el modulo home
-
-12. GitHub Actions
-
-Se ejecutaron los test  en git hub action
