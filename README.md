@@ -40,7 +40,7 @@ Diseñado para personas que desean crear o actualizar su currículum de forma r�
 ---
 
 ## 🌐 URL del Proyecto en Producción
-[🔗 Acceder a la Aplicación](https://kenkairon.pythonanywhere.com/)
+[🔗 Acceder a la Aplicación](https://portafolio-yyiq.onrender.com/)
 
 ---
 
